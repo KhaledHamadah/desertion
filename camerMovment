@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class cammove : MonoBehaviour
+{
+    public Transform body;
+
+    public float mouseSensitivity = 100f;
+
+    float MouseY;
+
+    private void Start()
+    {
+        MouseY = Mathf.Clamp(MouseY, -1, -1);
+    }
+    void FixedUpdate()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+        MouseY -= mouseY;
+        MouseY = Mathf.Clamp(MouseY, -90, 90);
+
+        transform.localRotation = Quaternion.Euler(MouseY, 0f, 0f);
+        body.Rotate(Vector3.up * mouseX);
+    }
+}
