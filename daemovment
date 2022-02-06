@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+// place in dave
+public class Davemovement : MonoBehaviour
+{
+    public CharacterController controller;
+
+    public float speed = 8;
+
+    private void Update()
+    {
+
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * x + transform.forward * z;
+        controller.Move(move * speed * Time.deltaTime);
+        
+        //this is to save and load game 
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            saveGame.SavePlayer(this);
+
+            Debug.Log("saving");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            PlayerData data = saveGame.LoadPlayer();
+
+            //level = data.level
+            //health = data.health
+
+            Vector3 position;
+            position.x = data.position[0];
+            position.y = data.position[1];
+            position.z = data.position[2];
+            transform.position = position;
+
+            Debug.Log("quit");
+        }
+    }
+    
+    
+}
