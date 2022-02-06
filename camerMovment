@@ -5,6 +5,7 @@ using UnityEngine;
 public class cammove : MonoBehaviour
 {
     public Transform body;
+    public Transform head;
 
     public float mouseSensitivity = 100f;
 
@@ -24,5 +25,6 @@ public class cammove : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(MouseY, 0f, 0f);
         body.Rotate(Vector3.up * mouseX);
+        head.Rotate(Vector3.left * mouseY);
     }
 }
